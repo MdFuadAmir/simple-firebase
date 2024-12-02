@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 const navLink = <>
 <Link to={'/'}>Home</Link>
 <Link to={'/login'}>Login</Link>
-<Link to={'/signin'}>Sign In</Link>
+<Link to={'/googlelogin'}>Google</Link>
+<Link to={'/githublogin'}>Github</Link>
 </>
 const Navber = () => {
     return (
