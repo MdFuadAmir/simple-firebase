@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const navLink = <>
 <Link to={'/'}>Home</Link>
 <Link to={'/login'}>Login</Link>
+<Link to={'/register'}>Register</Link>
 <Link to={'/googlelogin'}>Google</Link>
 <Link to={'/githublogin'}>Github</Link>
 </>

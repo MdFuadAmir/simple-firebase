@@ -1,10 +1,10 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../../Firebase/firebase.init";
 import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
-
-const Login = () => {
+const Register = () => {
     const [ragisterError, setRegisterError] = useState('');    
     const [ragisterSuccess, setRegisterSuccess] = useState('');    
     const [showPassword,setShowPassword] = useState(false);
@@ -40,23 +40,23 @@ const Login = () => {
     }
     return (
         <div className="h-screen flex flex-col justify-center items-center">
-        <form onSubmit={handleSubmit} className="border-2 rounded-md p-4 w-1/2 flex flex-col gap-4">
-        <input type="email" name="email" placeholder="Email" required className="border-2 px-4 py-2 rounded-md"/>
-        <div className="relative">
-        <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" required className="border-2 px-4 py-2 rounded-md w-full"/>
-        <span className="absolute top-4 right-2 cursor-pointer" onClick={ () => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash size={20}/> : <FaEye size={20}/>}</span>
+            <form onSubmit={handleSubmit} className="border-2 rounded-md p-4 w-1/2 flex flex-col gap-4">
+            <input type="email" name="email" placeholder="Email" required className="border-2 px-4 py-2 rounded-md"/>
+            <div className="relative">
+            <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" required className="border-2 px-4 py-2 rounded-md w-full"/>
+            <span className="absolute top-4 right-2 cursor-pointer" onClick={ () => setShowPassword(!showPassword)}>{showPassword ? <FaEyeSlash size={20}/> : <FaEye size={20}/>}</span>
+            </div>
+            <input type="submit" value="Register" className="btn"/>
+                {
+                    ragisterError  && <p className="text-red-600">{ragisterError}</p>
+                }
+                {
+                    ragisterSuccess && <p className="text-green-600">{ragisterSuccess}</p>
+                }
+                <p>Already have an account please <Link className="text-green-600" to="/login">Login!!</Link></p>
+            </form>
         </div>
-        <input type="submit" value="Log in" className="btn"/>
-            {
-                ragisterError  && <p className="text-red-600">{ragisterError}</p>
-            }
-            {
-                ragisterSuccess && <p className="text-green-600">{ragisterSuccess}</p>
-            }
-            <p>New to this website please <Link className="text-blue-600" to="/register">Register!!</Link></p>
-        </form>
-    </div>
     );
 };
 
-export default Login;
+export default Register;
