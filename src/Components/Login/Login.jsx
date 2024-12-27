@@ -36,11 +36,11 @@ const Login = () => {
                 setLoginSuccess("usr logged in successfully ")
             }
             else{
-                alert("please verifi your email")
+                alert("please verify  your email")
             }
         })
         .catch((error)=>{
-            const errorMessage = error.message;
+            const errorMessage = error.message; 
             setLoginError(errorMessage);
             console.log(errorMessage);
         })

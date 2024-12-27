@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import auth from "../../Firebase/firebase.init";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
@@ -11,9 +11,10 @@ const Register = () => {
 
     const handleSubmit = e =>{
         e.preventDefault();
+        const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email,password);
+        console.log(name,email,password);
         // reset error
         setRegisterError(" ");
         setRegisterSuccess(" ")
@@ -31,6 +32,17 @@ const Register = () => {
         .then(result =>{
             console.log(result.user);
             setRegisterSuccess('user created successfully.')
+            // update profile
+            updateProfile(result.user, {
+                displayName: name,
+                photoURL: "fuad"
+            })
+            .then(()=>{
+                console.log("profile updated");
+            })
+            .catch((error) =>{
+                console.error(error);
+            })
             // send varification email
             sendEmailVerification(result.user)
             .then(() =>{
@@ -42,11 +54,12 @@ const Register = () => {
             const errorMessage = error.message;
             setRegisterError(errorMessage);
             console.log(errorMessage);
-        })
+        }) 
     }
     return (
         <div className="h-screen flex flex-col justify-center items-center">
             <form onSubmit={handleSubmit} className="border-2 rounded-md p-4 w-1/2 flex flex-col gap-4">
+            <input type="text" name="name" placeholder="Name" required className="border-2 px-4 py-2 rounded-md"/>
             <input type="email" name="email" placeholder="Email" required className="border-2 px-4 py-2 rounded-md"/>
             <div className="relative">
             <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" required className="border-2 px-4 py-2 rounded-md w-full"/>
